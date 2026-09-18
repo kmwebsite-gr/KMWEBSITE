@@ -1312,3 +1312,152 @@ summary span {
     text-align: left;
   }
 }
+
+
+/* =====================================================
+   SERVICE DETAIL PAGES
+   ===================================================== */
+
+.service-page-hero {
+  padding: 170px 0 85px;
+  background: var(--cream-dark);
+  border-bottom: 1px solid var(--gray-light);
+}
+
+.service-page-hero-inner {
+  display: grid;
+  grid-template-columns: 1.1fr .9fr;
+  gap: 80px;
+  align-items: end;
+}
+
+.back-link {
+  display: inline-block;
+  margin-bottom: 42px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .06em;
+}
+
+.back-link:hover {
+  text-decoration: underline;
+}
+
+.service-page-hero .eyebrow {
+  margin-bottom: 16px;
+}
+
+.service-page-hero h1 {
+  font-size: clamp(56px, 7vw, 100px);
+}
+
+.service-page-intro {
+  max-width: 560px;
+  color: var(--gray);
+  font-size: 17px;
+}
+
+.service-page-gallery {
+  background: var(--cream);
+}
+
+.service-page-note {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 24px;
+  color: var(--gray);
+  font-size: 12px;
+}
+
+.service-page-cta {
+  padding: 100px 0;
+  background: var(--black);
+  color: var(--white);
+}
+
+.service-page-cta .eyebrow {
+  color: #aaa59d;
+}
+
+.service-page-cta-inner {
+  display: grid;
+  grid-template-columns: 1.1fr .9fr;
+  gap: 80px;
+  align-items: end;
+}
+
+.service-page-cta-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 28px;
+  flex-wrap: wrap;
+}
+
+.service-page-light-btn {
+  background: var(--white);
+  color: var(--black);
+}
+
+@media (max-width: 900px) {
+  .service-page-hero-inner,
+  .service-page-cta-inner {
+    grid-template-columns: 1fr;
+    gap: 42px;
+  }
+
+  .service-page-cta-actions {
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 600px) {
+  .service-page-hero {
+    padding: 130px 0 65px;
+  }
+
+  .back-link {
+    margin-bottom: 28px;
+  }
+
+  .service-page-intro {
+    font-size: 15px;
+  }
+
+  .service-page-cta {
+    padding: 75px 0;
+  }
+
+  .service-page-cta-actions {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
+
+/* =====================================================
+   SERVICE PAGE HEADER SPACING FIX
+   Keeps page titles clear of the fixed navigation bar.
+   ===================================================== */
+.service-page-hero {
+  padding-top: 210px !important;
+}
+
+.service-page-hero h1 {
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 900px) {
+  .service-page-hero {
+    padding-top: 185px !important;
+  }
+}
+
+@media (max-width: 600px) {
+  .service-page-hero {
+    padding-top: 165px !important;
+  }
+
+  .service-page-hero h1 {
+    font-size: clamp(42px, 12vw, 64px);
+  }
+}
