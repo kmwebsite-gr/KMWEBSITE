@@ -1,0 +1,15 @@
+K.M WEBSITE — ΤΕΛΙΚΟ ΠΑΚΕΤΟ
+
+Για GitHub:
+1. Ανέβασε ΟΛΑ τα περιεχόμενα αυτού του φακέλου στη ρίζα του repository.
+2. ΜΗΝ ανεβάσεις πραγματικό .env.
+3. Το Railway θα κάνει νέο deploy αυτόματα μετά το commit.
+
+Κύριες σελίδες:
+- public/index.html
+- public/kouzines.html
+- public/ntoulapes.html
+- public/portes.html
+- public/eidikes-kataskeves.html
+
+Οι 4 σελίδες υπηρεσιών έχουν την ίδια δομή με τη σελίδα Κουζίνες.
