@@ -208,101 +208,57 @@
 
                 <div class="service-grid">
 
-
                     <!-- SERVICE 01 -->
-
-                    <article class="service-card reveal">
-
-                        <span class="service-number">
-                            01
-                        </span>
-
-                        <h3>
-                            Κουζίνες
-                        </h3>
-
+                    <button class="service-card reveal" type="button" data-service="kitchens"
+                        aria-label="Δες φωτογραφίες από κουζίνες">
+                        <span class="service-number">01</span>
+                        <h3>Κουζίνες</h3>
                         <p>
                             Custom κουζίνες, εργονομικές λύσεις και
                             επιλογές υλικών που ταιριάζουν στον χώρο σου.
                         </p>
-
-                        <span class="service-arrow">
-                            ↗
-                        </span>
-
-                    </article>
-
+                        <span class="service-gallery-hint">Δες φωτογραφίες</span>
+                        <span class="service-arrow" aria-hidden="true">↗</span>
+                    </button>
 
                     <!-- SERVICE 02 -->
-
-                    <article class="service-card reveal">
-
-                        <span class="service-number">
-                            02
-                        </span>
-
-                        <h3>
-                            Ντουλάπες
-                        </h3>
-
+                    <button class="service-card reveal" type="button" data-service="wardrobes"
+                        aria-label="Δες φωτογραφίες από ντουλάπες">
+                        <span class="service-number">02</span>
+                        <h3>Ντουλάπες</h3>
                         <p>
                             Εντοιχισμένες και ελεύθερες ντουλάπες,
                             σχεδιασμένες μέχρι την τελευταία λεπτομέρεια.
                         </p>
-
-                        <span class="service-arrow">
-                            ↗
-                        </span>
-
-                    </article>
-
+                        <span class="service-gallery-hint">Δες φωτογραφίες</span>
+                        <span class="service-arrow" aria-hidden="true">↗</span>
+                    </button>
 
                     <!-- SERVICE 03 -->
-
-                    <article class="service-card reveal">
-
-                        <span class="service-number">
-                            03
-                        </span>
-
-                        <h3>
-                            Πόρτες
-                        </h3>
-
+                    <button class="service-card reveal" type="button" data-service="doors"
+                        aria-label="Δες φωτογραφίες από πόρτες">
+                        <span class="service-number">03</span>
+                        <h3>Πόρτες</h3>
                         <p>
                             Εσωτερικές και ειδικές πόρτες με καθαρές
                             γραμμές και προσεγμένο φινίρισμα.
                         </p>
-
-                        <span class="service-arrow">
-                            ↗
-                        </span>
-
-                    </article>
-
+                        <span class="service-gallery-hint">Δες φωτογραφίες</span>
+                        <span class="service-arrow" aria-hidden="true">↗</span>
+                    </button>
 
                     <!-- SERVICE 04 -->
-
-                    <article class="service-card reveal">
-
-                        <span class="service-number">
-                            04
-                        </span>
-
-                        <h3>
-                            Ειδικές κατασκευές
-                        </h3>
-
+                    <button class="service-card reveal" type="button" data-service="special"
+                        aria-label="Δες φωτογραφίες από ειδικές κατασκευές">
+                        <span class="service-number">04</span>
+                        <h3>Ειδικές κατασκευές</h3>
                         <p>
                             Έπιπλα, επενδύσεις και μοναδικές λύσεις,
                             φτιαγμένες ακριβώς σύμφωνα με την ανάγκη σου.
                         </p>
-
-                        <span class="service-arrow">
-                            ↗
-                        </span>
-
-                    </article>
+                        <span class="service-gallery-hint">Δες φωτογραφίες</span>
+                        <span class="service-arrow" aria-hidden="true">↗</span>
+                    </button>
 
                 </div>
 
@@ -337,8 +293,8 @@
                     </div>
 
                     <p class="section-intro">
-                        Μερικά ενδεικτικά projects.
-                        Αντικατάστησε τις φωτογραφίες με τις δικές σου.
+                        Μερικά ενδεικτικά έργα και κατασκευές,
+                        σχεδιασμένα με προσοχή στη λεπτομέρεια.
                     </p>
 
                 </div>
@@ -762,6 +718,26 @@
 
     </footer>
 
+
+
+    <!-- =====================================================
+       SERVICE GALLERY
+       ===================================================== -->
+
+    <div class="service-gallery-modal" aria-hidden="true" role="dialog" aria-modal="true"
+        aria-labelledby="service-gallery-title">
+        <div class="service-gallery-panel">
+            <button class="service-gallery-close" type="button" aria-label="Κλείσιμο συλλογής">×</button>
+
+            <div class="service-gallery-heading">
+                <p class="eyebrow">ΦΩΤΟΓΡΑΦΙΕΣ ΕΡΓΩΝ</p>
+                <h2 id="service-gallery-title">Κουζίνες</h2>
+                <p id="service-gallery-description"></p>
+            </div>
+
+            <div class="service-gallery-grid" id="service-gallery-grid"></div>
+        </div>
+    </div>
 
 
     <!-- =====================================================

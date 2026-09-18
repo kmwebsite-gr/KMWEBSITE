@@ -1,3 +1,42 @@
+const serviceGalleries = {
+  kitchens: {
+    title: "Κουζίνες",
+    description: "Δείγματα από κουζίνες και custom ξυλουργικές λύσεις. Πατήστε σε μια φωτογραφία για μεγέθυνση.",
+    images: [
+      { src: "images/project-01.jpg", alt: "Ξυλουργική κατασκευή κουζίνας", label: "Κουζίνα 01" },
+      { src: "images/project-02.jpg", alt: "Custom κατασκευή κουζίνας", label: "Κουζίνα 02" },
+      { src: "images/project-03.jpg", alt: "Λεπτομέρεια ξυλουργικής κουζίνας", label: "Κουζίνα 03" }
+    ]
+  },
+  wardrobes: {
+    title: "Ντουλάπες",
+    description: "Ενδεικτικές κατασκευές ντουλάπας και αποθηκευτικών λύσεων στα μέτρα του χώρου.",
+    images: [
+      { src: "images/project-02.jpg", alt: "Custom ντουλάπα", label: "Ντουλάπα 01" },
+      { src: "images/project-03.jpg", alt: "Εντοιχισμένη ντουλάπα", label: "Ντουλάπα 02" },
+      { src: "images/project-04.jpg", alt: "Ξυλουργική κατασκευή ντουλάπας", label: "Ντουλάπα 03" }
+    ]
+  },
+  doors: {
+    title: "Πόρτες",
+    description: "Δείγματα από εσωτερικές και ειδικές πόρτες με έμφαση στη λεπτομέρεια και το φινίρισμα.",
+    images: [
+      { src: "images/project-03.jpg", alt: "Ξύλινη πόρτα", label: "Πόρτα 01" },
+      { src: "images/project-04.jpg", alt: "Εσωτερική ξύλινη πόρτα", label: "Πόρτα 02" },
+      { src: "images/project-05.jpg", alt: "Ειδική κατασκευή πόρτας", label: "Πόρτα 03" }
+    ]
+  },
+  special: {
+    title: "Ειδικές κατασκευές",
+    description: "Custom έπιπλα, επενδύσεις και ειδικές ξυλουργικές λύσεις που σχεδιάζονται για κάθε χώρο.",
+    images: [
+      { src: "images/project-01.jpg", alt: "Ειδική ξυλουργική κατασκευή", label: "Κατασκευή 01" },
+      { src: "images/project-04.jpg", alt: "Custom ξύλινη κατασκευή", label: "Κατασκευή 02" },
+      { src: "images/project-05.jpg", alt: "Ειδική ξυλουργική λύση", label: "Κατασκευή 03" }
+    ]
+  }
+};
+
 document.addEventListener("DOMContentLoaded", () => {
   const menuToggle = document.querySelector(".menu-toggle");
   const nav = document.querySelector(".main-nav");
@@ -43,29 +82,104 @@ document.addEventListener("DOMContentLoaded", () => {
   const lightboxImage = lightbox?.querySelector("img");
   const lightboxText = lightbox?.querySelector("p");
   const closeButton = lightbox?.querySelector(".lightbox-close");
+
+  const serviceModal = document.querySelector(".service-gallery-modal");
+  const servicePanel = serviceModal?.querySelector(".service-gallery-panel");
+  const serviceCloseButton = serviceModal?.querySelector(".service-gallery-close");
+  const serviceTitle = document.getElementById("service-gallery-title");
+  const serviceDescription = document.getElementById("service-gallery-description");
+  const serviceGrid = document.getElementById("service-gallery-grid");
+
   let lastFocusedElement = null;
+  let serviceTrigger = null;
+
+  function openLightbox(src, title, alt = title) {
+    if (!lightbox || !lightboxImage) return;
+
+    lastFocusedElement = document.activeElement;
+    lightboxImage.src = src || "";
+    lightboxImage.alt = alt || title || "Project";
+    if (lightboxText) lightboxText.textContent = title || "";
+
+    lightbox.classList.add("active");
+    lightbox.setAttribute("aria-hidden", "false");
+    document.body.classList.add("no-scroll");
+    closeButton?.focus();
+  }
+
+  function renderServiceGallery(key) {
+    const gallery = serviceGalleries[key];
+    if (!gallery || !serviceModal || !serviceGrid) return;
+
+    if (serviceTitle) serviceTitle.textContent = gallery.title;
+    if (serviceDescription) serviceDescription.textContent = gallery.description;
+    serviceGrid.replaceChildren();
+
+    gallery.images.forEach((image) => {
+      const button = document.createElement("button");
+      button.type = "button";
+      button.className = "service-gallery-item";
+      button.setAttribute("aria-label", `Μεγέθυνση: ${image.label}`);
+
+      const img = document.createElement("img");
+      img.src = image.src;
+      img.alt = image.alt;
+      img.loading = "lazy";
+
+      const label = document.createElement("span");
+      label.textContent = image.label;
+
+      button.append(img, label);
+      button.addEventListener("click", () => openLightbox(image.src, image.label, image.alt));
+      serviceGrid.appendChild(button);
+    });
+  }
+
+  document.querySelectorAll(".service-card[data-service]").forEach((card) => {
+    card.addEventListener("click", () => {
+      if (!serviceModal) return;
+      serviceTrigger = card;
+      renderServiceGallery(card.dataset.service);
+      serviceModal.classList.add("active");
+      serviceModal.setAttribute("aria-hidden", "false");
+      document.body.classList.add("no-scroll");
+      serviceCloseButton?.focus();
+    });
+  });
+
+  function closeServiceGallery() {
+    if (!serviceModal) return;
+    serviceModal.classList.remove("active");
+    serviceModal.setAttribute("aria-hidden", "true");
+    if (!lightbox?.classList.contains("active")) {
+      document.body.classList.remove("no-scroll");
+    }
+    if (serviceTrigger instanceof HTMLElement) serviceTrigger.focus();
+  }
+
+  serviceCloseButton?.addEventListener("click", closeServiceGallery);
+  serviceModal?.addEventListener("click", (event) => {
+    if (event.target === serviceModal) closeServiceGallery();
+  });
+  servicePanel?.addEventListener("click", (event) => event.stopPropagation());
 
   document.querySelectorAll(".project").forEach((project) => {
     project.addEventListener("click", () => {
-      if (!lightbox || !lightboxImage) return;
-
-      lastFocusedElement = document.activeElement;
-      lightboxImage.src = project.dataset.image || "";
-      lightboxImage.alt = project.dataset.title || "Project";
-      if (lightboxText) lightboxText.textContent = project.dataset.title || "";
-
-      lightbox.classList.add("active");
-      lightbox.setAttribute("aria-hidden", "false");
-      document.body.classList.add("no-scroll");
-      closeButton?.focus();
+      openLightbox(
+        project.dataset.image || "",
+        project.dataset.title || "Project",
+        project.querySelector("img")?.alt || project.dataset.title || "Project"
+      );
     });
   });
 
   function closeLightbox() {
-    if (!lightbox) return;
+    if (!lightbox || !lightbox.classList.contains("active")) return;
     lightbox.classList.remove("active");
     lightbox.setAttribute("aria-hidden", "true");
-    document.body.classList.remove("no-scroll");
+    if (!serviceModal?.classList.contains("active")) {
+      document.body.classList.remove("no-scroll");
+    }
     if (lastFocusedElement instanceof HTMLElement) lastFocusedElement.focus();
   }
 
@@ -74,7 +188,12 @@ document.addEventListener("DOMContentLoaded", () => {
     if (event.target === lightbox) closeLightbox();
   });
   document.addEventListener("keydown", (event) => {
-    if (event.key === "Escape") closeLightbox();
+    if (event.key !== "Escape") return;
+    if (lightbox?.classList.contains("active")) {
+      closeLightbox();
+    } else if (serviceModal?.classList.contains("active")) {
+      closeServiceGallery();
+    }
   });
 
   loadReviews();
